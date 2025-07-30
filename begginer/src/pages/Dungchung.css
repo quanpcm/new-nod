@@ -1,0 +1,44 @@
+.form-container {
+  width: 300px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  background: white;
+  text-align: center;
+   background-color: rgba(255, 255, 255, 0.6); /* nền trắng mờ */
+  backdrop-filter: blur(10px);               /* hiệu ứng làm mờ nền sau */
+  -webkit-backdrop-filter: blur(10px);  
+}
+
+form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background: rgb(195, 172, 67);
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+form p {
+  margin-top: 12px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('/src/assets/cat-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+}

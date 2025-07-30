@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../configs/firebaseConfig';
-import NavBar from 'begginer/src/components/NavBar.jsx';
-import NavbarText from 'react-bootstrap/esm/NavbarText';
+import NavBar from '../components/NavBar.jsx'; // ✅ Sửa đúng đường dẫn
+// import NavbarText from 'react-bootstrap/esm/NavbarText'; // nếu không dùng thì giữ comment
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = [];
@@ -32,13 +33,13 @@ const ProductList = () => {
     fetchData();
   }, []);
 
-  // Dùng useEffect theo dõi cập nhật state
   useEffect(() => {
     console.log("Products updated:", products);
   }, [products]);
 
   return (
     <div>
+      <NavBar /> {/* nếu bạn dùng NavBar */}
       <h2>Danh sách sản phẩm</h2>
       {products.length === 0 ? (
         <p>Không có sản phẩm nào.</p>

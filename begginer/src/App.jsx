@@ -1,14 +1,17 @@
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 
 function App() {
   return (
-    <div>
-      <ProductList />
-      <Route path="/login" element={<Name />}/>
-      <Route path="/register" element={<Name />}/>
-      <Route path="/main" element={<ProductList />}/>
-      <Route path="/login" element={<Name />}/>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/main" element={<ProductList />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 }
 
