@@ -1,0 +1,81 @@
+.form-container {
+  max-width: 360px;
+  margin: 100px auto;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.form-container h2 {
+  font-size: 26px;
+  margin-bottom: 24px;
+  color: #333;
+  font-weight: 600;
+}
+
+form input {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 12px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+form input:focus {
+  border-color: #c3ac43;
+  outline: none;
+  background-color: #fffbe5;
+}
+
+form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  background: #c3ac43;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background: #a89136;
+}
+
+form p {
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+form a {
+  color: #c3ac43;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+form a:hover {
+  text-decoration: underline;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('/src/assets/cat-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

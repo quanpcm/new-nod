@@ -1,10 +1,10 @@
 // src/pages/Register.jsx
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../configs/firebaseConfig";
-import { Link, useNavigate } from "react-router-dom";
-import '../pages/Dungchung.css';
-
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../configs/firebaseConfig";
+import { useNavigate, Link } from "react-router-dom";
+import './LoginAndRegister.css';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -14,11 +14,19 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Register successful!");
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // ✅ Lưu thông tin user vào Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        createdAt: new Date()
+      });
+
+      alert("Đăng ký thành công!");
       navigate("/login");
     } catch (error) {
-      alert("Error: " + error.message);
+      alert("Lỗi: " + error.message);
     }
   };
 

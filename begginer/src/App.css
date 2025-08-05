@@ -1,9 +1,10 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: root; /* ✨ Chỉ padding trái và phải thôi */
   text-align: center;
 }
+
 
 .logo {
   height: 6em;
@@ -39,4 +40,12 @@
 
 .read-the-docs {
   color: #888;
+}
+
+body {
+  padding-top: 75px;
+  background: linear-gradient(to bottom, #fff1f5, #ffe4ec);
+  background-attachment: fixed;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
 }

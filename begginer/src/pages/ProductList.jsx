@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../configs/firebaseConfig';
-import NavBar from '../components/NavBar.jsx'; // ✅ Sửa đúng đường dẫn
-// import NavbarText from 'react-bootstrap/esm/NavbarText'; // nếu không dùng thì giữ comment
+import NavBar from '../components/NavBar.jsx';
+import './ProductList.css'; // Thêm CSS riêng
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -16,10 +16,7 @@ const ProductList = () => {
         const subCollectionRef = collection(db, 'products', 'list_product', subId);
         const subSnapshot = await getDocs(subCollectionRef);
 
-        console.log(`Sub-collection ${subId} has ${subSnapshot.size} documents.`);
-
         subSnapshot.forEach((doc) => {
-          console.log("Fetched document:", doc.id, doc.data());
           data.push({
             id: doc.id,
             ...doc.data(),
@@ -33,25 +30,26 @@ const ProductList = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log("Products updated:", products);
-  }, [products]);
-
   return (
-    <div>
-      <NavBar /> {/* nếu bạn dùng NavBar */}
-      <h2>Danh sách sản phẩm</h2>
-      {products.length === 0 ? (
-        <p>Không có sản phẩm nào.</p>
-      ) : (
-        products.map((product, index) => (
-          <div key={index} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>Giá: {product.price}</p>
-          </div>
-        ))
-      )}
+    <div className="product-list-container">
+      <div className="product-wrapper">
+        <h2 className="section-title">🐾 Sản phẩm mới nhất</h2>
+        <div className="product-grid">
+          {products.map((product, index) => (
+            <div className="product-card" key={index}>
+              <img
+                src={product.image || "/assets/default-cat.png"}
+                alt={product.name}
+                className="product-image"
+              />
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p className="price">{product.price}đ</p>
+              <button className="buy-btn">Mua ngay</button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
