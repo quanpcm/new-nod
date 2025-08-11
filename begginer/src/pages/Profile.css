@@ -1,0 +1,41 @@
+/* src/pages/Profile.css */
+
+.profile-container {
+  background-color: #fff0f6;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.profile-title {
+  color: #ff6699;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profile-info {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.profile-info span {
+  font-weight: bold;
+  .profile-avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffb6c1;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+  color: #ff3366;
+}

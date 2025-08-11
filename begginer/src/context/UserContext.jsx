@@ -1,34 +1,37 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../configs/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase"; // Đường dẫn đúng!
 
-export const UserContext = createContext();
-
-export const useUser = () => useContext(UserContext);
+const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-  const storedEmail = localStorage.getItem("loggedInUser");
-  if (storedEmail) {
-    const loadUser = async () => {
-      const docSnap = await getDoc(doc(db, "users", storedEmail));
-      if (docSnap.exists()) {
-        setUser(docSnap.data());
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const userRef = doc(db, "users", firebaseUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+          setUser({
+            email: firebaseUser.email,
+            uid: firebaseUser.uid,
+            password: localStorage.getItem("userPassword") || "",
+            balance: data.balance || 200000,
+            purchased: data.purchased || [],
+          });
+        }
+      } else {
+        setUser(null);
       }
-    };
-    loadUser();
-  }
-    }, []);
+    });
+    return () => unsubscribe();
+  }, []);
 
-
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-    
-  );
+  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
 };
 
-
+export const useUser = () => useContext(UserContext);

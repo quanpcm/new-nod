@@ -14,7 +14,8 @@
   border-radius: 15px; /* bo tròn navbar */
   box-shadow: 0 6px 15px rgba(255, 105, 135, 0.2);
   border: 2px solid #ffcce5;
-  display: block !important;
+  display: flex;
+  align-items: center;
 }
 
 

@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function NavBar() {
   const navigate = useNavigate();
