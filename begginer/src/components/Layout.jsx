@@ -2,13 +2,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
-import UserInfo from "./UserInfo"; // 👈 thêm dòng này
+import UserInfo from "./UserInfo";
 
 function Layout() {
   return (
     <div>
+      <UserInfo />
       <NavBar />
-      <UserInfo /> {/* 👈 hiển thị UserInfo ở đây */}
       <Outlet />
     </div>
   );

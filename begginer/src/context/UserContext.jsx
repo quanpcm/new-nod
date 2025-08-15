@@ -19,8 +19,10 @@ export const UserProvider = ({ children }) => {
           setUser({
             email: firebaseUser.email,
             uid: firebaseUser.uid,
+            name: data.name || "Người dùng",
+            avatar: data.avatar || "/default-avatar.png",
             password: localStorage.getItem("userPassword") || "",
-            balance: data.balance || 200000,
+            balance: data.balance ?? 200000, // mặc định 200k
             purchased: data.purchased || [],
           });
         }
@@ -28,10 +30,15 @@ export const UserProvider = ({ children }) => {
         setUser(null);
       }
     });
+
     return () => unsubscribe();
   }, []);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export const useUser = () => useContext(UserContext);

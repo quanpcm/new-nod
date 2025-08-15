@@ -21,6 +21,7 @@ function NavBar() {
             <Nav.Link onClick={() => navigate("/main")}>Trang chủ</Nav.Link>
             <Nav.Link onClick={() => navigate("/profile")}>Hồ sơ</Nav.Link>
             <Nav.Link onClick={() => navigate("/create")}>Tạo Sản Phẩm</Nav.Link>
+            <Nav.Link onClick={() => navigate("/login")}>Đăng nhập</Nav.Link>
             <NavDropdown title="Thêm 🐱" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => navigate("/cart")}>Giỏ hàng</NavDropdown.Item>
               <NavDropdown.Item onClick={() => navigate("/orders")}>Đơn hàng</NavDropdown.Item>

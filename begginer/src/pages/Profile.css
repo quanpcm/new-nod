@@ -9,6 +9,7 @@
   box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 .profile-title {
@@ -26,7 +27,10 @@
 
 .profile-info span {
   font-weight: bold;
-  .profile-avatar {
+  color: #ff3366;
+}
+
+.profile-avatar {
   width: 120px;
   height: 120px;
   object-fit: cover;
@@ -37,5 +41,13 @@
   background-color: white;
 }
 
-  color: #ff3366;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

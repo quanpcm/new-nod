@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../configs/firebaseConfig';
-import NavBar from '../components/NavBar.jsx';
-import './ProductList.css'; // Thêm CSS riêng
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../configs/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import "./ProductList.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const data = [];
-      const subCollectionIds = ["0001", "0002", "0003"];
+      const subCollectionIds = ["0001", "0002", "0003"]; // ID sản phẩm
 
       for (const subId of subCollectionIds) {
-        const subCollectionRef = collection(db, 'products', 'list_product', subId);
+        const subCollectionRef = collection(db, "products", "list_product", subId);
         const subSnapshot = await getDocs(subCollectionRef);
 
-        subSnapshot.forEach((doc) => {
+        subSnapshot.forEach((docSnap) => {
           data.push({
-            id: doc.id,
-            ...doc.data(),
+            id: docSnap.id,
+            ...docSnap.data(),
           });
         });
       }
@@ -30,6 +33,14 @@ const ProductList = () => {
     fetchData();
   }, []);
 
+  const handleViewProduct = (product) => {
+    if (!user) {
+      alert("Vui lòng đăng nhập để xem thông tin sản phẩm!");
+      return;
+    }
+    navigate("/product-info", { state: { product } });
+  };
+
   return (
     <div className="product-list-container">
       <div className="product-wrapper">
@@ -38,14 +49,15 @@ const ProductList = () => {
           {products.map((product, index) => (
             <div className="product-card" key={index}>
               <img
-                src={product.image || "/assets/default-cat.png"}
+                src={product.imageURL || "/assets/default-cat.png"}
                 alt={product.name}
                 className="product-image"
               />
               <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <p className="price">{product.price}đ</p>
-              <button className="buy-btn">Mua ngay</button>
+              <p className="price">{Number(product.price).toLocaleString()}đ</p>
+              <button className="buy-btn" onClick={() => handleViewProduct(product)}>
+                Mua ngay
+              </button>
             </div>
           ))}
         </div>
